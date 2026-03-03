@@ -1,44 +1,87 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Routes, Route, NavLink} from 'react-router-dom'
+import Home from './pages/Home'
+// import Search from './pages/Search'
+import Library from './pages/Library'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentTrack, setCurrentTrack] = useState(null)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+
+
+  const tracks =[
+    {id:1, title: 'NEW SONG', artist:'KNOWNEER' },
+    {id:2, title: 'ДОМ', artist:'MORGENSHTERN' },
+    {id:3, title: 'Track 3', artist:'Unknown' },
+  ]
+
+
 
   return (
     <>
       <div className='app'>
 
-        <div>
+        <div className='sidemain'>
 
           <aside className='sidebar'>
             <div className='logo'>
-              Spotify
+              KNOWNEER`s music
             </div>
 
             <nav className='menu'>
-              <button className='menuItem'>Home</button>
-              <button className='menuItem'>Search</button>
-              <button className='menuItem'>Library</button>
+              <NavLink to='/' className="menuItem">
+                Home
+              </NavLink>
+              <NavLink to='/library' className="menuItem">
+                Library
+              </NavLink>
+              {/* <NavLink to='/search' className="menuItem">
+                Search
+              </NavLink> */}
             </nav>
-          </aside>
+          </aside>  
 
-          <main className='main'>
-            <h1>Home</h1>
+          
 
-            <div className='tracks'>
-              <div className='track'>Track 1</div>
-              <div className='track'>Track 2</div>
-              <div className='track'>Track 3</div>
-            </div>
-          </main>
+
+
+            <main className="main">
+              <header className='topBar'>
+                {!isSearchOpen ? (
+                  <div className='searchPill' onClick={() => {setIsSearchOpen(true)}}>
+                    Search songs..
+                  </div>
+                ) : (
+                  <input 
+                    className='searchInput'
+                    placeholder='SearchSongs'
+                    autoFocus
+                    onBlur={() => {setIsSearchOpen(false)}}
+                  />
+                )}
+              </header>
+              <Routes>
+                <Route 
+                path='/'
+                element= {<Home tracks={tracks} setCurrentTrack={setCurrentTrack} />}
+                />
+                {/* <Route path="/search" element={<Search />} /> */}
+                <Route path="/library" element={<Library />} />
+              </Routes>
+            </main>
         </div>
 
         <footer className='player'>
           <div className='playerInfo'>
-            <div className='playerTitle'>Nothing`s play</div>
-            <div className='playerArtist'>-</div>
+            <div className='playerTitle'>
+              {currentTrack ? currentTrack.title : "Nothing`s play"}
+            </div>
+            <div className='playerArtist'>
+              {currentTrack ? currentTrack.artist : "-"}
+            </div>
           </div>
 
           <div className='playerControls'>
