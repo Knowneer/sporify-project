@@ -87,10 +87,15 @@ button {
   transform: scale(0.98);
 }
 
+
 .track{
+	display: flex;
+	align-items: center;
 
 	background: rgba(255, 255, 255, 0.06);
 
+	gap: 12px;
+	min-height:52px;
 	min-width: 0;
   padding: 18px 22px;
   border-radius: 18px;
@@ -108,35 +113,26 @@ button {
 .trackTitle {
   font-size: 18px;
   font-weight: 600;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .trackArtist {
   font-size: 13px;
   opacity: 0.7;
   margin-top: 4px;
-}
-
-.player{
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 12px 16px;
-	border-top: 1px solid rgba(255, 255, 255, 0.06);
-	backdrop-filter: blur(10px);
-	flex-shrink: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .playerInfo{
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	align-items: center;
 }
 
-.playerControls{
-	display: flex;
-	gap: 10px;
-}
 
 .playerControls button{
 	width: 40px;
@@ -164,7 +160,7 @@ button {
 	width: 100%;
 
 	padding-left: clamp(40px, 18vw, 300px);
-	box-sizing: border-box;
+	box-sizing: border-box;	
 
 }
 
@@ -208,4 +204,139 @@ button {
 }
 .searchInput:focus{
   border-color: rgba(255,255,255,0.25);
+}
+
+.trackInfo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-width: 0;
+	flex: 1;
+}
+
+.trackCover{
+	width: 50px;
+	height: 50px;
+	border-radius: 8px;
+}
+
+
+.progressBar{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	max-width: 520px;
+	margin-top: 4px;
+}
+
+.progressInput{
+	width: 100%;
+	height: 6px;
+	appearance: none;
+	background: rgba(255,255,255,0.2);
+	border-radius: 999px;
+	outline: none;
+}
+
+.progressInput::-webkit-slider-thumb{
+	appearance: none;
+	width: 14px;
+	height: 14px;
+	background:#ff3b30 ;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.player{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px 24px;
+	border-top: 1px solid #2a2a2a;
+	flex-shrink: 0;
+}
+
+.playerCenter{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	max-width: 700px;
+	padding-top: 6px;
+}
+
+.playerTitle{
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.playerArtist{
+	font-size: 14px;
+	opacity: 0.7;
+}
+
+.progressInput{
+	width: 100%;
+}
+
+.timeText {
+  font-size: 13px;
+  opacity: 0.7;
+  min-width: 40px;
+  text-align: center;
+}
+
+.playerControls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+audio {
+  display: none;
+}
+
+.pagination{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	margin-top: 18px;
+}
+
+.pagination button{
+	padding: 8px 14px;
+	border-radius: 10px;
+	border: 1px solid rgba(255,255,255, 0.12);
+	background: rgba(255,255,255,0.08);
+	cursor: pointer;
+}
+
+.refreshButton{
+	margin-top: 10px;
+	margin-bottom: 16px;
+	padding: 10px 16px;
+	border-radius: 14px;
+	border: 1px solid rgba(255,255,255, 0.12);
+	background: rgba(255,255,255,0.08);
+	color: inherit;
+	cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.refreshButton:hover{
+	background: rgba(255,255,255,0.12);
+}
+
+.refreshButton:active{
+	transform: scale(0.98);
+}
+
+.homeHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
 }
