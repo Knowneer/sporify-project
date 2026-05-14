@@ -12,18 +12,38 @@ function formatTime (time){
     const seconds = Math.floor(time % 60)
 
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
-} 
+}
 
 function App() {
+  const [savedTrack, setSavedTrack] = useState([])
   const [currentTrack, setCurrentTrack] = useState(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration ] = useState(0)
   const [searchQuery, setSearchQuery] = useState("")
-  const audioRef = useRef(null) 
+  const audioRef = ц(null)
   const navigate = useNavigate()
 
+  function addToLibrary(track){
+    setSavedTrack((prevTracks) =>{
+      const isAlreadySaved = prevTracks.some(
+        (savedTrack) => savedTrack.trackId === track.trackId
+      )
+
+      if (isAlreadySaved) {
+        return prevTracks
+      }
+
+      return [...prevTracks, track]
+    })
+  }
+
+  function removeFromLibrary(trackId) {
+    setSavedTrack((prevTracks)=>{
+      prevTracks.filter((track)=>{track.trackId !==trackId})
+    })
+  }
 
   return (
     <>
@@ -44,10 +64,7 @@ function App() {
                 Library
               </NavLink>
             </nav>
-          </aside>  
-
-          
-
+          </aside>
 
 
             <main className="main">
@@ -60,9 +77,9 @@ function App() {
                     Search songs..
                   </div>
                 ) : (
-                  <input 
+                  <input
                     value={searchQuery}
-                    onChange={(e)=>{ 
+                    onChange={(e)=>{
                       setSearchQuery(e.target.value)
                       navigate('/search')
                     }}
@@ -74,13 +91,12 @@ function App() {
                 )}
               </header>
               <Routes>
-                <Route 
+                <Route
                 path='/'
                 element= {<Home setCurrentTrack={setCurrentTrack} />}
                 />
-                {/* <Route path="/search" element={<Search />} /> */}
                 <Route path="/library" element={<Library />} />
-                <Route 
+                <Route
                   path='/search'
                   element={<Search searchQuery={searchQuery} setCurrentTrack={setCurrentTrack}/>}
                 />
@@ -124,7 +140,7 @@ function App() {
 
             <div className='playerControls'>
               <button>⏮</button>
-              <button 
+              <button
                 onClick={() => {
                   if (!audioRef.current) return
                   if(isPlaying){
@@ -133,7 +149,7 @@ function App() {
                     audioRef.current.play()
                   }
                 }}
-              > 
+              >
               { isPlaying ? "⏸" : "▶️"}
               </button>
               <button>⏭</button>

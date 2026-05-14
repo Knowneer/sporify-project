@@ -54,7 +54,7 @@ export default function Search({ searchQuery,setCurrentTrack }) {
 				))}
 			</div>
 
-			
+
 			{totalPages > 1 &&(
 			<div className='pagination'>
 				<button

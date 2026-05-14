@@ -2,7 +2,7 @@ import {useState, useEffect} from "react"
 
 
 export default function Home({ setCurrentTrack }) {
-  const [tracks,setTracks] = useState([]) 
+  const [tracks,setTracks] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
 
   function loadRandomTracks (){
@@ -11,21 +11,20 @@ export default function Home({ setCurrentTrack }) {
   "drake", "eminem", "weeknd", "kendrick", "rihanna",
   "love", "night", "summer", "dream", "dance"
   ]
-      const randomIndex = Math.floor(Math.random() * randomTerms.length)
+    const randomIndex = Math.floor(Math.random() * randomTerms.length)
     const randomTerm = randomTerms[randomIndex]
-    fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(randomTerm)}&limit=15&media=music`)
+    fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(randomTerm)}&limit=40&media=music`)
     .then(response => response.json())
     .then(data =>{
       setTracks(data.results)
       setCurrentPage(1)
+      console.log(data);
     })
 }
-  
 
   useEffect(()=>{
     loadRandomTracks()
   },[])
-
 
   const tracksPerPage = 5
   const startIndex = (currentPage - 1) * tracksPerPage
@@ -50,12 +49,12 @@ export default function Home({ setCurrentTrack }) {
             className="track"
             onClick={() => setCurrentTrack(track)}
           >
-            <img 
+            <img
               className='trackCover'
               src={track.artworkUrl100}
               alt='cover'
             />
-            <div className='trackInfo'>
+            <div className='  trackInfo'>
 						  <div className="trackTitle">{track.trackName}</div>
 						  <div className="trackArtist">{track.artistName}</div>
             </div>
