@@ -28,9 +28,9 @@ export default function Home({ setCurrentTrack }) {
 
   const tracksPerPage = 5
   const startIndex = (currentPage - 1) * tracksPerPage
-	const endIndex = startIndex + tracksPerPage
-	const visibleTracks = tracks.slice(startIndex, endIndex)
-	const totalPages = Math.ceil(tracks.length / tracksPerPage)
+  const endIndex = startIndex + tracksPerPage
+  const visibleTracks = tracks.slice(startIndex, endIndex)
+  const totalPages = Math.ceil(tracks.length / tracksPerPage)
 
 
   return (

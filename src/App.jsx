@@ -22,7 +22,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration ] = useState(0)
   const [searchQuery, setSearchQuery] = useState("")
-  const audioRef = (null)
+  const audioRef = useRef(null)
   const navigate = useNavigate()
 
   function addToLibrary(track){
